@@ -17,8 +17,9 @@ public class IOHandler {
 		boolean rejectInput= false;
 		try{
 			inputScanner = new Scanner(inputFile);
-			if(!inputScanner.hasNextLine())
-				rejectInput= true;
+			//FIXME needs error detection
+			
+			
 			inputScanner.close();
 		}catch (FileNotFoundException f){
 			System.err.println("File not found.");
