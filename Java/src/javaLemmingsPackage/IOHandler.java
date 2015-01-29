@@ -14,11 +14,24 @@ public class IOHandler {
 		//TODO ReadFile method still needs to place contents somewhere
 		inputFile = new File("test_level_01.txt");
 		Scanner inputScanner;
-		boolean rejectInput= false;
 		try{
 			inputScanner = new Scanner(inputFile);
 			//FIXME needs error detection
 			
+			World world = new World();
+			
+			String temp = inputScanner.nextLine();
+			world.setFallDistance(Integer.parseInt(temp));
+			temp = inputScanner.nextLine();
+			int time = Integer.parseInt(temp);
+			temp = inputScanner.nextLine();
+			int nS = Integer.parseInt(temp);
+			temp = inputScanner.nextLine();
+			int r = Integer.parseInt(temp);
+			
+			while(inputScanner.hasNext()){
+				
+			}
 			
 			inputScanner.close();
 		}catch (FileNotFoundException f){
