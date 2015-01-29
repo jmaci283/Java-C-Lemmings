@@ -5,9 +5,9 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class IOHandler {
-	Scanner io = new Scanner (System.in);							// Keyboard input
+	private Scanner io = new Scanner (System.in);							// Keyboard input
 	
-	File inputFile;
+	private File inputFile;
 	
 	//TODO add IO Methods
 	private void readFile(){
