@@ -10,7 +10,7 @@ public class IOHandler {
 	private File inputFile;
 	
 	//TODO add IO Methods
-	private void readFile(){
+	public void readFile(){
 		//TODO ReadFile method still needs to place contents somewhere
 		inputFile = new File("test_level_01.txt");
 		Scanner inputScanner;
@@ -23,20 +23,28 @@ public class IOHandler {
 			String temp = inputScanner.nextLine();
 			world.setFallDistance(Integer.parseInt(temp));
 			temp = inputScanner.nextLine();
-			int time = Integer.parseInt(temp);
+			world.setFallDistance(Integer.parseInt(temp));
 			temp = inputScanner.nextLine();
-			int nS = Integer.parseInt(temp);
+			world.setNeedSaving(Integer.parseInt(temp));
 			temp = inputScanner.nextLine();
-			int r = Integer.parseInt(temp);
-			
+			world.setReleased(Integer.parseInt(temp));
+			OGroup[] tempArr = new OGroup[world.getReleased()];
+			int counter = 0;
 			while(inputScanner.hasNext()){
-				
+				int xVal = inputScanner.nextInt();
+				int yVal = inputScanner.nextInt();
+				int time = inputScanner.nextInt();
+				tempArr[counter] = new OGroup(xVal,yVal,time);
+				counter++;
 			}
 			
 			inputScanner.close();
 		}catch (FileNotFoundException f){
 			System.err.println("File not found.");
 			f.printStackTrace();
+		}catch (NullPointerException n){
+			System.err.println("Null Pointer.");
+			n.printStackTrace();
 		}
 	}
 	

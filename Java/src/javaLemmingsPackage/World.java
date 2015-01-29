@@ -58,57 +58,6 @@ public class World {
 	}
 
 
-	//Ordered pair type
- 	private class OPair{
-		private int x;
-		private int y;
-		
-		OPair(int xVal, int yVal){
-			this.x = xVal;
-			this.y = yVal;
-		}
-		
-		public int getX() {
-			return x;
-		}
-		public void setX(int x) {
-			this.x = x;
-		}
-		public int getY() {
-			return y;
-		}
-		public void setY(int y) {
-			this.y = y;
-		}
-	}
-	
-	// Ordered group type
-	private class OGroup{
-
-		
-		
-		private OPair pair;
-		private int time;
-		
-		OGroup(int xVal, int yVal, int timeVal){
-			this.pair = new OPair(xVal,yVal);
-			this.time=timeVal;
-		}	
-		
-		public OPair getPair() {
-			return pair;
-		}
-		public void setPair(OPair pair) {
-			this.pair = pair;
-		}
-		public int getTime() {
-			return time;
-		}
-		public void setTime(int time) {
-			this.time = time;
-		}
-	}
-	
 	// Lemming Skill Set Count
 	private static class SkillSet{
 		
