@@ -6,7 +6,7 @@ public class WorldManager {
 		World world = new World();
 		IOHandler io = new IOHandler();
 		world = io.readFile();
-		
+		io.displayWorldInfo(world);
 	}
 
 }
