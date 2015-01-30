@@ -35,7 +35,7 @@ public class IOHandler {
 		Scanner inputScanner;
 		try {
 			inputScanner = new Scanner(inputFile);
-			
+
 			// world placeholder
 			World world = new World();
 
@@ -158,7 +158,31 @@ public class IOHandler {
 			counter++;
 			pCounter++;
 		}
-		
+		System.out.println("World Size: \t\t\t[" + world.getWorldSize().getX()
+				+ "] by [" + world.getWorldSize().getY() + "]");
+		System.out.println("World Diagram:");
+		counter = 0;
+		int sndCount = 0;
+		while (counter < world.getWorldSize().getY()) {
+			while (sndCount < world.getWorldSize().getX()) {
+				if (world.getWorld()[sndCount][counter].getType() == 1) {
+					System.out.print('a');
+				} else if (world.getWorld()[sndCount][counter].getType() == 2) {
+					System.out.print('d');
+				} else {
+					System.out.print('r');
+				}
+				sndCount++;
+			}
+			System.out.print("\n");
+			sndCount = 0;
+			counter++;
+		}
+		System.out.println("Exit Location:\t\t\t("
+				+ world.getExitLocation().getX() + ","
+				+ world.getExitLocation().getY() + ")");
+		System.out.println("Skillset:");
+
 		System.err.println("Other shit goes here");
 		System.out.println("******************");
 	}
