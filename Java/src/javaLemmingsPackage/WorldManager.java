@@ -1,9 +1,12 @@
 package javaLemmingsPackage;
 
 public class WorldManager {
-	IOHandler io = new IOHandler();
-	World world = new World();
-	
-	io.readFile();
-	
+
+	public static void main(String[] args) {
+		World world = new World();
+		IOHandler io = new IOHandler();
+		world = io.readFile();
+		
+	}
+
 }
