@@ -182,8 +182,14 @@ public class IOHandler {
 				+ world.getExitLocation().getX() + ","
 				+ world.getExitLocation().getY() + ")");
 		System.out.println("Skillset:");
-
-		System.err.println("Other shit goes here");
+		System.out.println("Climbers available: \t\t[" + world.getSkillsAvailable().getC() + "]");
+		System.out.println("Floaters available: \t\t[" + world.getSkillsAvailable().getF() + "]");
+		System.out.println("Exploders available: \t\t[" + world.getSkillsAvailable().getE() + "]");
+		System.out.println("Blockers available: \t\t[" + world.getSkillsAvailable().getK() + "]");
+		System.out.println("Builders available: \t\t[" + world.getSkillsAvailable().getB() + "]");
+		System.out.println("Bashers available: \t\t[" + world.getSkillsAvailable().getS() + "]");
+		System.out.println("Diggers available: \t\t[" + world.getSkillsAvailable().getD() + "]");
+		System.out.println("Miners available: \t\t[" + world.getSkillsAvailable().getM() + "]");
 		System.out.println("******************");
 	}
 

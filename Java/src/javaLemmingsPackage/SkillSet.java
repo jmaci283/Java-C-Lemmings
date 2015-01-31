@@ -3,14 +3,14 @@ package javaLemmingsPackage;
 // Lemming Skill Set Count
 class SkillSet{
 	
-	private int c;
-	private int f;
-	private int e;
-	private int k;
-	private int b;
-	private int s;
-	private int d;
-	private int m;
+	private int c;		//climber
+	private int f;		//floater
+	private int e;		//exploder
+	private int k;		//blocker
+	private int b;		//builder
+	private int s;		//basher
+	private int d;		//digger
+	private int m;		//miner
 	
 	SkillSet(int[] skills){
 		this.c = skills[0];
