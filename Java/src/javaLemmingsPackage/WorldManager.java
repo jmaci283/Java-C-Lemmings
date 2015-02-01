@@ -7,6 +7,11 @@ public class WorldManager {
 		IOHandler io = new IOHandler();
 		world = io.readFile();
 		io.displayWorldInfo(world);
+		io.printWorld(world);
+	}
+	
+	private void incWorldTime(World world){
+		world.incWorldTime();
 	}
 
 }

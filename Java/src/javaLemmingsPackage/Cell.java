@@ -31,4 +31,10 @@ class Cell {
 		public void setLemming(Lemming lemming) {
 			this.lemming = lemming;
 		}
+		
+		public void addLemming(Lemming lemming){
+			while(lemming.getNextLem() != null){
+				//TODO need to keep working on this to add lemmings to the list for a single cell
+			}
+		}
 }

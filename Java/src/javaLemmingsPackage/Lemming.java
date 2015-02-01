@@ -7,13 +7,15 @@ public class Lemming {
 	private boolean orientation;				// False is left, True is right
 	private int xLocation;
 	private int yLocation;
-	
+	private Lemming nextLem;
+
 	Lemming(int num, int xVal, int yVal){
 		this.ID = num;
 		this.ability = 0;
 		this.orientation = false;
 		this.xLocation = xVal;
 		this.yLocation = yVal;
+		this.nextLem = null;
 	}
 	
 	public int getID() {
@@ -52,5 +54,12 @@ public class Lemming {
 		this.yLocation = yLocation;
 	}
 	
+	public Lemming getNextLem() {
+		return nextLem;
+	}
+
+	public void setNextLem(Lemming nextLem) {
+		this.nextLem = nextLem;
+	}
 	
 }

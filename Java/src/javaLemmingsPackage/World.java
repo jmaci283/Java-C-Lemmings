@@ -41,6 +41,22 @@ public class World {
 	}
 	public void incWorldTime() {
 		this.worldTime++;
+		//FIXME current lemmings should move before any new lemmings are added to the mix
+		int counter = 0;
+		while(counter < startLocations.length){
+			if(worldTime == startLocations[counter].getTime()){
+				int xPos = startLocations[counter].getPair().getX();
+				int yPos = startLocations[counter].getPair().getY();
+				int lemNum = getLemmingQueue().size();
+				Lemming lem = new Lemming(lemNum,xPos,yPos);
+				enqueueLemming(lem);
+				world[xPos][yPos].setLemming(lem);
+				//TODO add the lemming to the start location cell
+			}
+			counter ++;
+		}
+		//FIXME need to add lemming addition and movement.
+		
 	}	
 	
 	public int getQueueSize(){

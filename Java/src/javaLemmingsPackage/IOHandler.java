@@ -192,5 +192,23 @@ public class IOHandler {
 		System.out.println("Miners available: \t\t[" + world.getSkillsAvailable().getM() + "]");
 		System.out.println("******************");
 	}
+	
+	public void printWorld(World world){
+		int counter = 0;
+		int sndCounter = 0;
+		while(counter < world.getWorldSize().getY()){
+			while (sndCounter < world.getWorldSize().getX()){
+				if (world.getWorld()[sndCounter][counter].getType() == 1) {
+					System.out.print('a');
+				} else if (world.getWorld()[sndCounter][counter].getType() == 2) {
+					System.out.print('d');
+				} else {
+					System.out.print('r');
+				}
+			}
+			sndCounter = 0;
+			counter++;
+		}
+	}
 
 }
