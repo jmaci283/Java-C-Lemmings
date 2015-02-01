@@ -50,6 +50,7 @@ public class World {
 				int lemNum = getLemmingQueue().size();
 				Lemming lem = new Lemming(lemNum,xPos,yPos);
 				enqueueLemming(lem);
+				//while()
 				world[xPos][yPos].setLemming(lem);
 				//TODO add the lemming to the start location cell
 			}
