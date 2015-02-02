@@ -199,11 +199,20 @@ public class IOHandler {
 		while(counter < world.getWorldSize().getY()){
 			while (sndCounter < world.getWorldSize().getX()){
 				if (world.getWorld()[sndCounter][counter].getType() == 1) {
-					System.out.print('a');
+					if(world.getWorld()[sndCounter][counter].hasLemming())
+						System.out.print('X');
+					else
+						System.out.print('a');
 				} else if (world.getWorld()[sndCounter][counter].getType() == 2) {
-					System.out.print('d');
+					if(world.getWorld()[sndCounter][counter].hasLemming())
+						System.out.print('X');
+					else
+						System.out.print('d');
 				} else {
-					System.out.print('r');
+					if(world.getWorld()[sndCounter][counter].hasLemming())
+						System.out.print('X');
+					else
+						System.out.print('r');
 				}
 			}
 			sndCounter = 0;

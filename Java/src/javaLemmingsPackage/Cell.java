@@ -3,15 +3,15 @@ package javaLemmingsPackage;
 // cell in the world
 class Cell {
 		private int type;
-		private Lemming lemming;
+		private Lemming lemming[];
 		
 		Cell(int cellType){
 			this.type = cellType;
-			this.lemming = null;
+			this.lemming = new Lemming[50];
 		}
 		
 		public boolean hasLemming(){
-			if(lemming != null)
+			if(lemming[0] != null)
 				return true;
 			return false;
 		}
@@ -23,18 +23,23 @@ class Cell {
 		public void setType(int type) {
 			this.type = type;
 		}
-
-		public Lemming getLemming() {
+		
+		public Lemming[] getLemming() {
 			return lemming;
 		}
 
-		public void setLemming(Lemming lemming) {
+		public void setLemming(Lemming[] lemming) {
 			this.lemming = lemming;
 		}
-		
-		public void addLemming(Lemming lemming){
-			while(lemming.getNextLem() != null){
-				//TODO need to keep working on this to add lemmings to the list for a single cell
+
+		public boolean addLemming(Lemming l){
+			int counter = 0;
+			while(lemming[counter] != null && counter < 50){
+				counter++;
 			}
+			if(counter == 50)
+				return false;
+			lemming[counter] = l;
+			return true;
 		}
 }
