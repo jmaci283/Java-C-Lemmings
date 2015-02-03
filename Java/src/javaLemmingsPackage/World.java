@@ -26,6 +26,7 @@ public class World {
 		this.fallDistance = 0;
 		this.timeLimit = 0;
 		this.needSaving = 0;
+		this.saved = 0;
 		this.released = 0;
 		this.startLocations = null;
 		this.worldSize = null;
@@ -53,14 +54,19 @@ public class World {
 		} else {
 			// FIXME current lemmings should move before any new lemmings are
 			// added to the mix
-			
-				//TODO add lemming exiting
+				
 			// FIXME needs lemming movement
 				// TODO add lemming falling
 				// TODO add lemming directional movement
 				// TODO add lemming collision detection and orientation change
-				
-			
+			// lemming exiting
+			if(world[exitLocation.getX()][exitLocation.getY()].hasLemming()){
+				int count = 0;
+				while(world[exitLocation.getX()][exitLocation.getY()].getLemming()[count] != null){
+					lemmingExit(world[exitLocation.getX()][exitLocation.getY()].getLemming()[count]);
+				}
+			}
+			// addition of new lemmings
 			int counter = 0;
 			while (counter < startLocations.length) {
 				if (worldTime == startLocations[counter].getTime()) {
@@ -73,14 +79,17 @@ public class World {
 						System.out.println("Lemming added to cell");
 					else
 						System.out.println("Cell full");
-					
-					// TODO add the lemming to the start location cell
 				}
 				counter++;
 			}
 		}
-		// FIXME need to add lemming addition and movement.
 
+	}
+	
+	private void lemmingExit(Lemming lem){
+		lemmingQueue.remove(lem);
+		lem = null;
+		saved++;
 	}
 
 	public int getQueueSize() {
@@ -179,5 +188,7 @@ public class World {
 	public void setSkillsAvailable(SkillSet skillsAvailable) {
 		this.skillsAvailable = skillsAvailable;
 	}
+	
+	
 
 }

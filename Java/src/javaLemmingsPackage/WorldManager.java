@@ -8,10 +8,12 @@ public class WorldManager {
 		world = io.readFile();
 		io.displayWorldInfo(world);
 		io.printWorld(world);
-	}
-	
-	private void incWorldTime(World world){
-		world.incWorldTime();
+		while(world.getWorldTime() < world.getTimeLimit()){
+			world.incWorldTime();
+			io.printWorld(world);
+		}
 	}
 
+	
+	
 }

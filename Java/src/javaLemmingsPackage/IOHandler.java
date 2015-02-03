@@ -27,8 +27,7 @@ public class IOHandler {
 			super(cause);
 		}
 	}
-
-	// TODO add IO Methods
+	
 	public World readFile() {
 		// TODO ReadFile method still needs to place contents somewhere
 		inputFile = new File("test_level_01.txt");
@@ -194,6 +193,7 @@ public class IOHandler {
 	}
 	
 	public void printWorld(World world){
+		System.out.println("World Diagram:");
 		int counter = 0;
 		int sndCounter = 0;
 		while(counter < world.getWorldSize().getY()){
@@ -214,7 +214,9 @@ public class IOHandler {
 					else
 						System.out.print('r');
 				}
+				sndCounter++;
 			}
+			System.out.println();
 			sndCounter = 0;
 			counter++;
 		}
