@@ -11,8 +11,10 @@ class Cell {
 		}
 		
 		public boolean hasLemming(){
-			if(lemming[0] != null)
-				return true;
+			for (int i = 0; i < lemming.length; i++) {
+				if(lemming[i] != null)
+					return true;	
+			}
 			return false;
 		}
 
@@ -28,8 +30,8 @@ class Cell {
 			return lemming;
 		}
 
-		public void setLemming(Lemming[] lemming) {
-			this.lemming = lemming;
+		public void setLemming(int i, Lemming lem) {
+			this.lemming[i] = lem;
 		}
 
 		public boolean addLemming(Lemming l){
