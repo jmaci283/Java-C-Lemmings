@@ -7,6 +7,8 @@ public class Lemming {
 	private boolean orientation;				// False is left, True is right
 	private int xLocation;
 	private int yLocation;
+	
+	private boolean hasMoved;
 
 	Lemming(int num, int xVal, int yVal){
 		this.ID = num;
@@ -14,6 +16,7 @@ public class Lemming {
 		this.orientation = false;
 		this.xLocation = xVal;
 		this.yLocation = yVal;
+		this.hasMoved = false;
 	}
 	
 	public int getID() {
@@ -50,6 +53,14 @@ public class Lemming {
 	}
 	public void setyLocation(int yLocation) {
 		this.yLocation = yLocation;
+	}
+
+	public boolean isHasMoved() {
+		return hasMoved;
+	}
+
+	public void setHasMoved(boolean hasMoved) {
+		this.hasMoved = hasMoved;
 	}
 	
 }
