@@ -58,41 +58,37 @@ public class World {
 					if(world[j][i].hasLemming()){ // lemming present in cell
 						if(world[j][i].getType() == 1){ // this cell is air
 							for (int lemC = 0; lemC < world[j][i].getLemming().length; lemC++) { // iterates through the cell's lemming array
-								if(!world[j][i].getLemming()[lemC].isHasMoved()){
-									if(i != (worldSize.getY()-1) && world[j][i+1].getType() == 1){ // cell below is air, shift down
-								
-										if(world[j][i].getLemming()[lemC] != null){// found lemming in cell's array
-											world[j][i].getLemming()[lemC].setyLocation(i+1);
-											world[j][i].getLemming()[lemC].setHasMoved(true);
-											world[j][i+1].addLemming(world[j][i].getLemming()[lemC]);
-											world[j][i].setLemming(lemC,null);
-										}
-									}else{ // below is not air, don't need to fall, need to move
-										System.out.println("Got Here");
-										if(!world[j][i].getLemming()[lemC].isOrientation()){// orientation = left
-											if(j == 0){ // left is out of bounds, change orientation
-												world[j][i].getLemming()[lemC].setOrientation(true);
-											}else{ // in bounds
-												if(world[j-1][i].getType() == 3 || world[j-1][i].getType() == 2){ // left is not air, cant go there
-											
-												}else{
-													world[j][i].getLemming()[lemC].setxLocation(j-1);
-													world[j][i].getLemming()[lemC].setHasMoved(true);
-													world[j-1][i].addLemming(world[j][i].getLemming()[lemC]);
-													world[j][i].setLemming(lemC,null);
-												}
+								if(world[j][i].getLemming()[lemC] != null){
+									if(!world[j][i].getLemming()[lemC].isHasMoved()){
+										if(i != (worldSize.getY()-1) && world[j][i+1].getType() == 1){ // cell below is air, shift down
+											if(world[j][i].getLemming()[lemC] != null){// found lemming in cell's array
+												world[j][i].getLemming()[lemC].setyLocation(i+1);
+												world[j][i].getLemming()[lemC].setHasMoved(true);
+												world[j][i+1].addLemming(world[j][i].getLemming()[lemC]);
+												world[j][i].setLemming(lemC,null);
 											}
-										}else{// orientation = right
-												if(j+1 == worldSize.getX()){ // right is out of bounds, change orientation
-												world[j][i].getLemming()[lemC].setOrientation(false);
-											}else{ // in bounds
-												if(world[j+1][i].getType() == 3 || world[j+1][i].getType() == 2){ // right is not air, can't go there
-											
-												}else{
-													world[j][i].getLemming()[lemC].setxLocation(j+1);
-													world[j][i].getLemming()[lemC].setHasMoved(true);
-													world[j+1][i].addLemming(world[j][i].getLemming()[lemC]);
-													world[j][i].setLemming(lemC,null);
+										}else{ // below is not air, don't need to fall, need to move
+											if(!world[j][i].getLemming()[lemC].isOrientation()){// orientation = left
+												if(j == 0){ // left is out of bounds, change orientation
+													world[j][i].getLemming()[lemC].setOrientation(true);
+												}else{ // in bounds
+													if(!(world[j-1][i].getType() == 3 || world[j-1][i].getType() == 2)){ // left is air, go
+														world[j][i].getLemming()[lemC].setxLocation(j-1);
+														world[j][i].getLemming()[lemC].setHasMoved(true);
+														world[j-1][i].addLemming(world[j][i].getLemming()[lemC]);
+														world[j][i].setLemming(lemC,null);
+													}
+												}
+											}else{// orientation = right
+													if(j+1 == worldSize.getX()){ // right is out of bounds, change orientation
+													world[j][i].getLemming()[lemC].setOrientation(false);
+												}else{ // in bounds
+													if(!(world[j+1][i].getType() == 3 || world[j+1][i].getType() == 2)){ // right is air, go
+														world[j][i].getLemming()[lemC].setxLocation(j+1);
+														world[j][i].getLemming()[lemC].setHasMoved(true);
+														world[j+1][i].addLemming(world[j][i].getLemming()[lemC]);
+														world[j][i].setLemming(lemC,null);
+													}
 												}
 											}
 										}
@@ -107,10 +103,12 @@ public class World {
 
 		// lemming exiting
 		if (world[exitLocation.getX()][exitLocation.getY()].hasLemming()) {
-			int count = 0;
-			while (world[exitLocation.getX()][exitLocation.getY()].getLemming()[count] != null) {
-				lemmingExit(world[exitLocation.getX()][exitLocation.getY()]
-						.getLemming()[count]);
+			for (int i = 0; i < world[exitLocation.getX()][exitLocation.getY()].getLemming().length; i++) {
+				if (world[exitLocation.getX()][exitLocation.getY()].getLemming()[i] != null) {
+					lemmingQueue.remove(world[exitLocation.getX()][exitLocation.getY()].getLemming()[i]);
+					world[exitLocation.getX()][exitLocation.getY()].getLemming()[i] = null;
+					saved++;
+				}
 			}
 		}
 		// addition of new lemmings
@@ -133,25 +131,16 @@ public class World {
 		for (int k = 0; k < worldSize.getY(); k++) {
 			for (int l = 0; l < worldSize.getX(); l++) {
 				if(world[l][k].hasLemming()){
-					try{
 					for (int m = 0; m < world[l][k].getLemming().length; m++) {
-						if(world[l][k].getLemming()[m].isHasMoved()){
-							world[l][k].getLemming()[m].setHasMoved(false);
+						if(world[l][k].getLemming()[m] != null){
+							if(world[l][k].getLemming()[m].isHasMoved()){
+								world[l][k].getLemming()[m].setHasMoved(false);
+							}
 						}
-					}
-					}catch (NullPointerException n){
-						n.printStackTrace();
-						//FIXME figure out why the array is not working as it should
 					}
 				}
 			}
 		}
-	}
-
-	private void lemmingExit(Lemming lem) {
-		lemmingQueue.remove(lem);
-		lem = null;
-		saved++;
 	}
 
 	public int getQueueSize() {

@@ -1,0 +1,23 @@
+10
+80
+1
+1
+2 14 1
+13 15
+raaaaaaaaaaar
+raaaaaaaaaaar
+rrrrdrrrdrrrr
+raaaaaraaaaar
+raaaaaraaaaar
+rrdrrrrrrrdrr
+raaaaaraaaaar
+raaaaaraaaaar
+rrrrdrrrdrrrr
+raaaaaraaaaar
+raaaaaraaaaar
+rrdrrrrrrrdrr
+raaaaaraaaaar
+raaaaaraaaaar
+rrrrrrrrrrrrr
+4 1
+0 0 0 0 0 0 4 0
