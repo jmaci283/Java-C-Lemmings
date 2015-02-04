@@ -36,8 +36,12 @@ public class Lemming {
 	public boolean isOrientation() {
 		return orientation;
 	}
-	public void setOrientation(boolean orientation) {
-		this.orientation = orientation;
+	
+	public void changeOrientation() {
+		if(this.orientation)
+			this.orientation = false;
+		else
+			this.orientation = true;
 	}
 
 	

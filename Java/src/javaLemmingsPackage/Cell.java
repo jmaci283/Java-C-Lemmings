@@ -17,6 +17,16 @@ class Cell {
 			}
 			return false;
 		}
+		
+		public boolean hasBasher(){
+			for (int i = 0; i < lemming.length; i++) {
+				if(lemming[i] != null){
+					if(lemming[i].getAbility() == 1)
+						return true;
+				}
+			}
+			return false;
+		}
 
 		public int getType() {
 			return type;

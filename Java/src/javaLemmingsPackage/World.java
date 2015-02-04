@@ -42,14 +42,19 @@ public class World {
 		return worldTime;
 	}
 
-	public void incWorldTime() {
+	public boolean incWorldTime() {
+		boolean simDone = false;
 		this.worldTime++;
 		if (worldTime == timeLimit || saved == released) { // check for game over
-			if (saved >= needSaving)
+			if (saved >= needSaving){
 				System.out.println("Solved");
+				simDone = true;
+			}
 			// game is won
-			else
+			else{
 				System.out.println("Not solved");
+				simDone = true;
+			}
 			// end the sim
 		} else {
 			// lemming movement
@@ -67,27 +72,60 @@ public class World {
 												world[j][i+1].addLemming(world[j][i].getLemming()[lemC]);
 												world[j][i].setLemming(lemC,null);
 											}
-										}else{ // below is not air, don't need to fall, need to move
-											if(!world[j][i].getLemming()[lemC].isOrientation()){// orientation = left
-												if(j == 0){ // left is out of bounds, change orientation
-													world[j][i].getLemming()[lemC].setOrientation(true);
-												}else{ // in bounds
-													if(!(world[j-1][i].getType() == 3 || world[j-1][i].getType() == 2)){ // left is air, go
-														world[j][i].getLemming()[lemC].setxLocation(j-1);
-														world[j][i].getLemming()[lemC].setHasMoved(true);
-														world[j-1][i].addLemming(world[j][i].getLemming()[lemC]);
-														world[j][i].setLemming(lemC,null);
+										}else{ // below is not air, don't need to fall
+											if(world[j][i].getLemming()[lemC].getAbility() == 3 && world[j][i+1].getType() == 2){ // can dig dirt below
+												world[j][i+1].setType(1);
+												world[j][i].getLemming()[lemC].setyLocation(i+1);
+												world[j][i].getLemming()[lemC].setHasMoved(true);
+												world[j][i+1].addLemming(world[j][i].getLemming()[lemC]);
+												world[j][i].setLemming(lemC,null);
+												
+											}else{ // move horizontally
+												if(!world[j][i].getLemming()[lemC].isOrientation()){// orientation = left
+													if(j == 0){ // left is out of bounds, change orientation
+														world[j][i].getLemming()[lemC].changeOrientation();;
+													}else{ // in bounds
+														if(!(world[j-1][i].getType() == 3 || world[j-1][i].getType() == 2)){ // left is air, go
+															if(!world[j-1][i].hasBasher()){
+																world[j][i].getLemming()[lemC].setxLocation(j-1);
+																world[j][i].getLemming()[lemC].setHasMoved(true);
+																world[j-1][i].addLemming(world[j][i].getLemming()[lemC]);
+																world[j][i].setLemming(lemC,null);
+															}else{
+																world[j][i].getLemming()[lemC].changeOrientation();
+															}
+														}else if(world[j][i].getLemming()[lemC].getAbility() == 2){ // lemming is a basher
+															// bash it
+															world[j-1][i].setType(1);
+															// now go there
+															world[j][i].getLemming()[lemC].setxLocation(j-1);
+															world[j][i].getLemming()[lemC].setHasMoved(true);
+															world[j-1][i].addLemming(world[j][i].getLemming()[lemC]);
+															world[j][i].setLemming(lemC,null);
+														}
 													}
-												}
-											}else{// orientation = right
+												}else{// orientation = right
 													if(j+1 == worldSize.getX()){ // right is out of bounds, change orientation
-													world[j][i].getLemming()[lemC].setOrientation(false);
-												}else{ // in bounds
-													if(!(world[j+1][i].getType() == 3 || world[j+1][i].getType() == 2)){ // right is air, go
-														world[j][i].getLemming()[lemC].setxLocation(j+1);
-														world[j][i].getLemming()[lemC].setHasMoved(true);
-														world[j+1][i].addLemming(world[j][i].getLemming()[lemC]);
-														world[j][i].setLemming(lemC,null);
+														world[j][i].getLemming()[lemC].changeOrientation();
+													}else{ // in bounds
+														if(!(world[j+1][i].getType() == 3 || world[j+1][i].getType() == 2)){ // right is air, go
+															if(!world[j+1][i].hasBasher()){
+																world[j][i].getLemming()[lemC].setxLocation(j+1);
+																world[j][i].getLemming()[lemC].setHasMoved(true);
+																world[j+1][i].addLemming(world[j][i].getLemming()[lemC]);
+																world[j][i].setLemming(lemC,null);
+															}else{
+																world[j][i].getLemming()[lemC].changeOrientation();
+															}
+														}else if(world[j][i].getLemming()[lemC].getAbility() == 2){ // lemmign is a basher
+															// bash it
+															world[j+1][i].setType(1);
+															// now go there
+															world[j][i].getLemming()[lemC].setxLocation(j+1);
+															world[j][i].getLemming()[lemC].setHasMoved(true);
+															world[j+1][i].addLemming(world[j][i].getLemming()[lemC]);
+															world[j][i].setLemming(lemC,null);
+														}
 													}
 												}
 											}
@@ -141,6 +179,7 @@ public class World {
 				}
 			}
 		}
+	return simDone;
 	}
 
 	public int getQueueSize() {
