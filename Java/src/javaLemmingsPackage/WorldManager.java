@@ -8,11 +8,16 @@ public class WorldManager {
 		world = io.readFile();
 		io.displayWorldInfo(world);
 		io.printWorld(world);
-		while(world.getWorldTime() < world.getTimeLimit() && world.incWorldTime() == false){
+		while(world.incWorldTime() == false){
 			io.printWorld(world);
 		}
+		System.out.println(world.getLemmingQueue().size());
 	}
 
-	
+	private boolean generateSolution(World world , String solution){
+		
+		
+		return false;
+	}
 	
 }

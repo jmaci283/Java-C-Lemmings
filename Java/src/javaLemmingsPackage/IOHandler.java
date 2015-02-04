@@ -29,7 +29,6 @@ public class IOHandler {
 	}
 	
 	public World readFile() {
-		// TODO ReadFile method still needs to place contents somewhere
 		inputFile = new File("test_level_01.txt");
 		Scanner inputScanner;
 		try {

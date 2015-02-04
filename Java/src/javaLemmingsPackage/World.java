@@ -4,7 +4,6 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class World {
-	// TODO add world methods that interact with cell
 
 	// FIELDS
 	private int fallDistance;
@@ -57,6 +56,7 @@ public class World {
 			}
 			// end the sim
 		} else {
+			System.out.println(lemmingQueue.size());
 			// lemming movement
 			for (int i = 0; i < worldSize.getY(); i++) { // this is y var
 				for (int j = 0; j < worldSize.getX(); j++) { //this is x var
@@ -66,6 +66,8 @@ public class World {
 								if(world[j][i].getLemming()[lemC] != null){
 									if(!world[j][i].getLemming()[lemC].isHasMoved()){
 										if(i != (worldSize.getY()-1) && world[j][i+1].getType() == 1){ // cell below is air, shift down
+											if(world[j][i].getLemming()[lemC].getAbility() == 3)
+												world[j][i].getLemming()[lemC].setAbility(0); // end digging, air is below
 											if(world[j][i].getLemming()[lemC] != null){// found lemming in cell's array
 												world[j][i].getLemming()[lemC].setyLocation(i+1);
 												world[j][i].getLemming()[lemC].setHasMoved(true);
@@ -83,7 +85,9 @@ public class World {
 											}else{ // move horizontally
 												if(!world[j][i].getLemming()[lemC].isOrientation()){// orientation = left
 													if(j == 0){ // left is out of bounds, change orientation
-														world[j][i].getLemming()[lemC].changeOrientation();;
+														if(world[j][i].getLemming()[lemC].getAbility() == 2) 
+															world[j][i].getLemming()[lemC].setAbility(0); // hit a dead end, lose bashing ability
+														world[j][i].getLemming()[lemC].changeOrientation();
 													}else{ // in bounds
 														if(!(world[j-1][i].getType() == 3 || world[j-1][i].getType() == 2)){ // left is air, go
 															if(!world[j-1][i].hasBasher()){
@@ -106,6 +110,8 @@ public class World {
 													}
 												}else{// orientation = right
 													if(j+1 == worldSize.getX()){ // right is out of bounds, change orientation
+														if(world[j][i].getLemming()[lemC].getAbility() == 2)
+															world[j][i].getLemming()[lemC].setAbility(0); // hit a dead end, lose bashing ability
 														world[j][i].getLemming()[lemC].changeOrientation();
 													}else{ // in bounds
 														if(!(world[j+1][i].getType() == 3 || world[j+1][i].getType() == 2)){ // right is air, go
@@ -117,7 +123,7 @@ public class World {
 															}else{
 																world[j][i].getLemming()[lemC].changeOrientation();
 															}
-														}else if(world[j][i].getLemming()[lemC].getAbility() == 2){ // lemmign is a basher
+														}else if(world[j][i].getLemming()[lemC].getAbility() == 2){ // lemming is a basher
 															// bash it
 															world[j+1][i].setType(1);
 															// now go there
