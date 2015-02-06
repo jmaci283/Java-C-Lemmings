@@ -29,7 +29,7 @@ public class IOHandler {
 	}
 	
 	public World readFile() {
-		inputFile = new File("test_level_01.txt");
+		inputFile = new File("03-simple-exit-below.txt");
 		Scanner inputScanner;
 		try {
 			inputScanner = new Scanner(inputFile);
@@ -65,6 +65,7 @@ public class IOHandler {
 				counter++;
 				int time = Integer.parseInt(tempVals[counter]);
 				counter++;
+				
 				tempArr[tempCounter] = new OGroup(xVal, yVal, time);
 				tempCounter++;
 			}
@@ -91,6 +92,7 @@ public class IOHandler {
 					} else if (tempC[counter] == 'r') { // rock
 						tempCellArr[counter][tempCounter] = new Cell(3);
 					} else {
+						inputScanner.close();
 						throw new InvalidInputException();
 					}
 					counter++;
@@ -116,6 +118,7 @@ public class IOHandler {
 			SkillSet ss = new SkillSet(tempInts);
 			world.setSkillsAvailable(ss);
 
+			reformatInput(world);
 			// return the placeholder
 			inputScanner.close();
 			return world;
@@ -219,6 +222,16 @@ public class IOHandler {
 			sndCounter = 0;
 			counter++;
 		}
+	}
+	
+	private void reformatInput(World temp){
+		for (int i = 0; i < temp.getStartLocations().length; i++) {
+			int num = (temp.getWorldSize().getY()-1) - temp.getStartLocations()[i].getPair().getY();
+			temp.getStartLocations()[i].getPair().setY(num);
+		}
+		
+		int num = (temp.getWorldSize().getY()-1) - temp.getExitLocation().getY();
+		temp.getExitLocation().setY(num);
 	}
 
 }
