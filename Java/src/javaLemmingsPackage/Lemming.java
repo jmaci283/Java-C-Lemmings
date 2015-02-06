@@ -1,3 +1,10 @@
+//*************************
+//NAME: James MacIsaac
+//EMAIL: jmaci283@mtroyal.ca
+//CLASS: COMP 3649
+//FILE: Lemming.java
+//*************************
+
 package javaLemmingsPackage;
 
 public class Lemming {

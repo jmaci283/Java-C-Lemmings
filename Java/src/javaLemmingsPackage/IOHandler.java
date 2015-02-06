@@ -1,3 +1,10 @@
+//*************************
+//NAME: James MacIsaac
+//EMAIL: jmaci283@mtroyal.ca
+//CLASS: COMP 3649
+//FILE: IOHandler.java
+//*************************
+
 package javaLemmingsPackage;
 
 import java.io.File;
@@ -28,8 +35,8 @@ public class IOHandler {
 		}
 	}
 	
-	public World readFile() {
-		inputFile = new File("03-simple-exit-below.txt");
+	public World readFile(String fileName) {
+		inputFile = new File(fileName);
 		Scanner inputScanner;
 		try {
 			inputScanner = new Scanner(inputFile);
@@ -222,6 +229,20 @@ public class IOHandler {
 			sndCounter = 0;
 			counter++;
 		}
+	}
+	
+	public void displayAbilityCard(AbilityCard a){
+		System.out.println("Time = ["+a.getTime()+ "]" );
+		System.out.println("Lemming = [" + a.getLemming() +"]");
+		System.out.println("Coordinates = (" +a.getCoordinates().getX() + "," + a.getCoordinates().getY() + ")");
+		String ability = null;
+		if(a.getAbility() == 1)
+			ability = "Blocker";
+		else if(a.getAbility() == 2)
+			ability = "Basher";
+		else
+			ability = "Digger";
+		System.out.println("Ability Granted = [" + ability + "]");
 	}
 	
 	private void reformatInput(World temp){

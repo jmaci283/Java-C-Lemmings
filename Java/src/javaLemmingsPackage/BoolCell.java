@@ -1,3 +1,10 @@
+//*************************
+//NAME: James MacIsaac
+//EMAIL: jmaci283@mtroyal.ca
+//CLASS: COMP 3649
+//FILE: BoolCell.java
+//*************************
+
 package javaLemmingsPackage;
 
 public class BoolCell {

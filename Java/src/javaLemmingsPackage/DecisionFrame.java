@@ -1,3 +1,10 @@
+//*************************
+//NAME: James MacIsaac
+//EMAIL: jmaci283@mtroyal.ca
+//CLASS: COMP 3649
+//FILE: DecisionFrame.java
+//*************************
+
 package javaLemmingsPackage;
 
 public class DecisionFrame {

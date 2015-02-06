@@ -1,3 +1,10 @@
+//*************************
+//NAME: James MacIsaac
+//EMAIL: jmaci283@mtroyal.ca
+//CLASS: COMP 3649
+//FILE: Cell.java
+//*************************
+
 package javaLemmingsPackage;
 
 // cell in the world
@@ -18,7 +25,7 @@ class Cell {
 			return false;
 		}
 		
-		public boolean hasBasher(){
+		public boolean hasBlocker(){
 			for (int i = 0; i < lemming.length; i++) {
 				if(lemming[i] != null){
 					if(lemming[i].getAbility() == 1)

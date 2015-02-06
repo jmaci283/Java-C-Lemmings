@@ -1,3 +1,10 @@
+//*************************
+//NAME: James MacIsaac
+//EMAIL: jmaci283@mtroyal.ca
+//CLASS: COMP 3649
+//FILE: World.java
+//*************************
+
 package javaLemmingsPackage;
 
 import java.util.LinkedList;
@@ -90,7 +97,7 @@ public class World {
 														world[j][i].getLemming()[lemC].changeOrientation();
 													}else{ // in bounds
 														if(!(world[j-1][i].getType() == 3 || world[j-1][i].getType() == 2)){ // left is air, go
-															if(!world[j-1][i].hasBasher()){
+															if(!world[j-1][i].hasBlocker()){
 																world[j][i].getLemming()[lemC].setxLocation(j-1);
 																world[j][i].getLemming()[lemC].setHasMoved(true);
 																world[j-1][i].addLemming(world[j][i].getLemming()[lemC]);
@@ -115,7 +122,7 @@ public class World {
 														world[j][i].getLemming()[lemC].changeOrientation();
 													}else{ // in bounds
 														if(!(world[j+1][i].getType() == 3 || world[j+1][i].getType() == 2)){ // right is air, go
-															if(!world[j+1][i].hasBasher()){
+															if(!world[j+1][i].hasBlocker()){
 																world[j][i].getLemming()[lemC].setxLocation(j+1);
 																world[j][i].getLemming()[lemC].setHasMoved(true);
 																world[j+1][i].addLemming(world[j][i].getLemming()[lemC]);
