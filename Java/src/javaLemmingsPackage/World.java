@@ -63,7 +63,6 @@ public class World {
 			}
 			// end the sim
 		} else {
-			System.out.println(lemmingQueue.size());
 			// lemming movement
 			for (int i = 0; i < worldSize.getY(); i++) { // this is y var
 				for (int j = 0; j < worldSize.getX(); j++) { //this is x var

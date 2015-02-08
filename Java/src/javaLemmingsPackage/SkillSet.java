@@ -58,27 +58,27 @@ class SkillSet{
 	
 	//Decrementers
 	public void decC() {
-		this.c = c-1;
+		this.c--;
 	}
 	public void decF(){
-		this.f = f-1;
+		this.f--;
 	}
 	public void decE() {
-		this.e = e-1;
+		this.e--;
 	}
 	public void decK() {
-		this.k = k-1;
+		this.k--;
 	}
 	public void decB() {
-		this.b = b-1;
+		this.b--;
 	}
 	public void decS() {
-		this.s = s-1;
+		this.s--;
 	}
 	public void decD() {
-		this.d = d-1;
+		this.d--;
 	}
 	public void decM() {
-		this.m = m-1;
+		this.m--;
 	}
 }
