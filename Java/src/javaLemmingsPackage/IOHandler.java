@@ -148,6 +148,7 @@ public class IOHandler {
 		System.out.println("******************");
 		System.out.println("Maximum Fall Distance: \t["
 				+ world.getFallDistance() + "]");
+		System.out.println("Current Time \t\t[" + world.getWorldTime() + "]" );
 		System.out.println("Time Limit \t\t\t[" + world.getTimeLimit() + "]");
 		System.out.println("Lemmings that need to be saved:\t["
 				+ world.getNeedSaving() + "]");

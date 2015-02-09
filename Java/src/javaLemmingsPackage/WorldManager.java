@@ -27,6 +27,12 @@ public class WorldManager {
 		io.displayWorldInfo(world);
 		io.printWorld(world);
 		Stack<DecisionFrame> levelStack = new Stack<DecisionFrame>();
+		DecisionFrame d = new DecisionFrame(world);
+		
+		levelStack.push(d);
+		//TODO initialize components
+		
+	
 		if(generateSolution(world,levelStack)){
 			System.out.println("Solution found");
 		}else{
@@ -36,7 +42,9 @@ public class WorldManager {
 
 	private boolean generateSolution(World world , Stack<DecisionFrame> decisionStack){
 		
+		IOHandler io = new IOHandler();
 		
+		io.displayWorldInfo(world);
 		
 		boolean solved = false;
 		World wTemp = world;
@@ -50,7 +58,6 @@ public class WorldManager {
 				return true;
 			}else{ // not solved, need to backtrack and change paths
 				
-				//FIXME need to initialize stack so that it can be accessed properly
 				DecisionFrame tempF = decisionStack.pop();	// remove dead end element
 				BoolCell workingAP[][] = tempF.getAttemptedPaths();
 				AbilityCard workingAC[] = tempF.getAbilitiesGranted();
@@ -59,22 +66,23 @@ public class WorldManager {
 				// this part handles blacking out the things that have been tried already
 				for (int i = 0; i < world.getWorldSize().getY(); i++) { // iterate through y array
 					for (int j = 0; j < world.getWorldSize().getX(); j++) { // iterate through x array
-						if(workingAP[j][i].getCellSet() != null){ // are there any paths that have been created
-							for (int k = 0; k < workingAP[j][i].getCellSet().length; k++) { // iterate through paths
-								if (workingAP[j][i].getCellSet()[k] != null) { // does this set exist?
-									for(int m = 0; m < workingAC.length; m++)
-										if(workingAC[m].getAbility() == 1){
-											workingAP[j][i].getCellSet()[k].setHasTryBlocker(true);
-										}else if(workingAC[m].getAbility() == 2){
-											workingAP[j][i].getCellSet()[k].setHasTryBasher(true);
-										}else if(workingAC[m].getAbility() == 3){
-											workingAP[j][i].getCellSet()[k].setHasTryDigger(true);
-										}else{
-											workingAP[j][i].getCellSet()[k].setHasTryNothing(true); // set it's try nothing to true
-										}
-								}
-							}	
-						}
+						if(workingAP[j][i] != null)
+							if(workingAP[j][i].getCellSet() != null){ // are there any paths that have been created
+								for (int k = 0; k < workingAP[j][i].getCellSet().length; k++) { // iterate through paths
+									if (workingAP[j][i].getCellSet()[k] != null) { // does this set exist?
+										for(int m = 0; m < workingAC.length; m++)
+											if(workingAC[m].getAbility() == 1){
+												workingAP[j][i].getCellSet()[k].setHasTryBlocker(true);
+											}else if(workingAC[m].getAbility() == 2){
+												workingAP[j][i].getCellSet()[k].setHasTryBasher(true);
+											}else if(workingAC[m].getAbility() == 3){
+												workingAP[j][i].getCellSet()[k].setHasTryDigger(true);
+											}else{
+												workingAP[j][i].getCellSet()[k].setHasTryNothing(true); // set it's try nothing to true
+											}
+									}
+								}	
+							}
 					}
 				}
 				
