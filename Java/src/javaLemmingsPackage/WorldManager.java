@@ -33,25 +33,25 @@ public class WorldManager {
 		//TODO initialize components
 		
 	
-		if(generateSolution(world,levelStack)){
+		if(generateSolution(levelStack)){
 			System.out.println("Solution found");
 		}else{
 			System.out.println("Solution not found");
 		}
 	}
 
-	private boolean generateSolution(World world , Stack<DecisionFrame> decisionStack){
+	private boolean generateSolution(Stack<DecisionFrame> decisionStack){
 		
 		IOHandler io = new IOHandler();
-		
-		io.displayWorldInfo(world);
+		World aWorld = decisionStack.peek().getFrame();
 		
 		boolean solved = false;
-		World wTemp = world;
+		World world = aWorld;
 						// push frame onto stack
 		solved = world.incWorldTime();					// advance time - allow environment to run 1 step
 		
 		if(solved){ // concluded a simulation attempt
+			io.displayWorldInfo(world);
 			// need to add case for unsolvable level
 			if(world.getSaved() >= world.getNeedSaving()){
 			// done - solution made
@@ -99,37 +99,37 @@ public class WorldManager {
 									workingAC[lemC]= new AbilityCard(world.getWorldTime(),world.getWorld()[countX][countY].getLemming()[lemC].getID(), new OPair(countX,countY), 3);
 									world.getWorld()[countX][countY].getLemming()[lemC].setAbility(3); // set to a digger
 									world.getSkillsAvailable().decD();
-									DecisionFrame dFrame = new DecisionFrame(wTemp); // push world state on the frame
+									DecisionFrame dFrame = new DecisionFrame(world); // push world state on the frame
 									dFrame.setAbilitiesGranted(workingAC); // make abilities granted = what we just gave the lemmings
 									decisionStack.push(dFrame);		
-									return generateSolution(world,decisionStack);
+									return generateSolution(decisionStack);
 								}else if(world.getWorld()[countX-1][countY].getType() == 2 && !workingAP[countX][countY].getCellSet()[lemC].isHasTryBasher() && !world.getWorld()[countX][countY].getLemming()[lemC].isOrientation() && world.getSkillsAvailable().getS() >=1){
 									found = true;
 									workingAC[lemC]= new AbilityCard(world.getWorldTime(),world.getWorld()[countX][countY].getLemming()[lemC].getID(), new OPair(countX,countY), 2);
 									world.getWorld()[countX][countY].getLemming()[lemC].setAbility(2); // set to a basher
 									world.getSkillsAvailable().decS();
-									DecisionFrame dFrame = new DecisionFrame(wTemp); // push world state on the frame
+									DecisionFrame dFrame = new DecisionFrame(world); // push world state on the frame
 									dFrame.setAbilitiesGranted(workingAC); // make abilities granted = what we just gave the lemmings
 									decisionStack.push(dFrame);		
-									return generateSolution(world,decisionStack);
+									return generateSolution(decisionStack);
 								}else if(world.getWorld()[countX+1][countY].getType() == 2 && !workingAP[countX][countY].getCellSet()[lemC].isHasTryBasher() && world.getWorld()[countX][countY].getLemming()[lemC].isOrientation() && world.getSkillsAvailable().getS() >=1){
 									found = true;
 									workingAC[lemC]= new AbilityCard(world.getWorldTime(),world.getWorld()[countX][countY].getLemming()[lemC].getID(), new OPair(countX,countY), 2);
 									world.getWorld()[countX][countY].getLemming()[lemC].setAbility(2); // set to a basher
 									world.getSkillsAvailable().decS();
-									DecisionFrame dFrame = new DecisionFrame(wTemp); // push world state on the frame
+									DecisionFrame dFrame = new DecisionFrame(world); // push world state on the frame
 									dFrame.setAbilitiesGranted(workingAC); // make abilities granted = what we just gave the lemmings
 									decisionStack.push(dFrame);		
-									return generateSolution(world,decisionStack);
+									return generateSolution(decisionStack);
 								}else if(world.getWorld()[countX][countY+1].getType() == 2 && !workingAP[countX][countY].getCellSet()[lemC].isHasTryBlocker() && world.getSkillsAvailable().getK() >=1){
 									found = true;
 									workingAC[lemC]= new AbilityCard(world.getWorldTime(),world.getWorld()[countX][countY].getLemming()[lemC].getID(), new OPair(countX,countY), 1);
 									world.getWorld()[countX][countY].getLemming()[lemC].setAbility(1);// set to a blocker
 									world.getSkillsAvailable().decK();
-									DecisionFrame dFrame = new DecisionFrame(wTemp); // push world state on the frame
+									DecisionFrame dFrame = new DecisionFrame(world); // push world state on the frame
 									dFrame.setAbilitiesGranted(workingAC); // make abilities granted = what we just gave the lemmings
 									decisionStack.push(dFrame);		
-									return generateSolution(world,decisionStack);
+									return generateSolution(decisionStack);
 								}
 								
 							}
@@ -138,7 +138,7 @@ public class WorldManager {
 				}
 			}
 		}else{ // simulation not done, go again
-			return generateSolution(world,decisionStack); // recursive call to continue sim until timeout or success
+			return generateSolution(decisionStack); // recursive call to continue sim until timeout or success
 		}
 		return false;
 	}

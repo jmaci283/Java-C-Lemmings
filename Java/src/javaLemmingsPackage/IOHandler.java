@@ -200,6 +200,8 @@ public class IOHandler {
 		System.out.println("Diggers available: \t\t[" + world.getSkillsAvailable().getD() + "]");
 		System.out.println("Miners available: \t\t[" + world.getSkillsAvailable().getM() + "]");
 		System.out.println("******************");
+		
+		System.out.println(world.getQueueSize()); //TODO get rid of this
 	}
 	
 	public void printWorld(World world){
