@@ -70,9 +70,40 @@ instance Show Level where
 			++ (show d) ++ "\n\t" 
 			++ (show wSize) ++ "\n\t" 
 			++ (show exLoc) ++ "\n\t" 
-			++ (show worldConf)			
+			++ (show worldConf)		
+
+data ExpandedWorld =  MakeExpandedWorld [[WorldCell]]
+
+instance Show ExpandedWorld where
+	show (MakeExpandedWorld w) = "World Contents by Cell :\n" ++ show w
 
 -- need to make the world get reformatted tot he new type which includes cell fields			
+
+data ExpandedLevel = MakeExpandedLevel	Int					
+										Int					
+										Int				
+										[OGroup]
+										Int
+										Int
+										Position
+										Position
+										ExpandedWorld
+										
+instance Show ExpandedLevel where
+	show (MakeExpandedLevel t s r initLoc b d wSize exLoc worldConf) =
+		"Level contents: \n\t" ++ (show t) ++ "\n\t" 
+			++ (show s) ++ "\n\t" 
+			++ (show r) ++ "\n\t" 
+			++ (show initLoc) ++ "\n\t" 
+			++ (show b) ++ "\n\t" 
+			++ (show d) ++ "\n\t" 
+			++ (show wSize) ++ "\n\t" 
+			++ (show exLoc) ++ "\n\t" 
+			++ (show worldConf)							
+				
+convertWorldFormat :: Level -> ExpandedLevel
+convertWorldFormat (MakeLevel t s r initLoc b d wSize exLoc worldConf) = (MakeExpandedLevel t s r initLoc b d wSize exLoc (map (worldConf (MakeWorldCell worldConf []))))
+
 
 --test level to play with
 testData1 :: Level
@@ -93,7 +124,7 @@ testData1 = MakeLevel
 			    "aaaaaaaaaa",
 			    "aaaaaaaaaa"])
 
-convertWorldFormat :: Level -> 				
+ 				
 -- solution stubb area				
 data Solution = MakeSolution [(OGroup, Char)]
 
