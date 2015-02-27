@@ -12,7 +12,7 @@ instance Show Position where
     show (MakePosition x y) = "(" ++ (show x) ++ "," ++ (show y) ++ ")"
 
 -- 2D array of stuff in the level	
-data World = MakeWorld [[Char]]	
+data World = MakeWorld [[WorldCell]]	
 
 instance Show World where
 	show (MakeWorld w) = "World " ++ show w
@@ -58,7 +58,7 @@ data Level = MakeLevel	Int						-- Time Limit
 						Int						-- Diggers
 						Position				-- World Size
 						Position				-- Exit Location
-						World					-- World Cells
+						[WorldCell]					-- World Cells
 						
 instance Show Level where
     show (MakeLevel t s r initLoc b d wSize exLoc worldConf) =
@@ -70,39 +70,7 @@ instance Show Level where
 			++ (show d) ++ "\n\t" 
 			++ (show wSize) ++ "\n\t" 
 			++ (show exLoc) ++ "\n\t" 
-			++ (show worldConf)		
-
-data ExpandedWorld =  MakeExpandedWorld [[WorldCell]]
-
-instance Show ExpandedWorld where
-	show (MakeExpandedWorld w) = "World Contents by Cell :\n" ++ show w
-
--- need to make the world get reformatted tot he new type which includes cell fields			
-
-data ExpandedLevel = MakeExpandedLevel	Int					
-										Int					
-										Int				
-										[OGroup]
-										Int
-										Int
-										Position
-										Position
-										ExpandedWorld
-										
-instance Show ExpandedLevel where
-	show (MakeExpandedLevel t s r initLoc b d wSize exLoc worldConf) =
-		"Level contents: \n\t" ++ (show t) ++ "\n\t" 
-			++ (show s) ++ "\n\t" 
-			++ (show r) ++ "\n\t" 
-			++ (show initLoc) ++ "\n\t" 
-			++ (show b) ++ "\n\t" 
-			++ (show d) ++ "\n\t" 
-			++ (show wSize) ++ "\n\t" 
-			++ (show exLoc) ++ "\n\t" 
-			++ (show worldConf)							
-				
-convertWorldFormat :: Level -> ExpandedLevel
-convertWorldFormat (MakeLevel t s r initLoc b d wSize exLoc worldConf) = (MakeExpandedLevel t s r initLoc b d wSize exLoc (map (worldConf (MakeWorldCell worldConf []))))
+			++ (show worldConf)	++ "\n"	
 
 
 --test level to play with
